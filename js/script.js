@@ -87,7 +87,7 @@ tabBtns.forEach((btn, idx) => {
 
 
  // timer
-const deadline = "2024-05-05 20:17"
+const deadline = "2024-05-09 00:00"
 const canvas = document.querySelector('#confetti');
 
 const jsConfetti = new JSConfetti();
