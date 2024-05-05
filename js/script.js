@@ -84,3 +84,79 @@ tabBtns.forEach((btn, idx) => {
             tabBtns[btnIndex].classList.add('tabheader__item_active')
         }
  })
+
+
+ // timer
+const deadline = "2024-05-05 20:17"
+const canvas = document.querySelector('#confetti');
+
+const jsConfetti = new JSConfetti();
+getRemainingTime(deadline)
+function getRemainingTime(endTime) {
+    let day = document.querySelector("#days")
+let hour = document.querySelector('#hours')
+let min = document.querySelector('#minutes')
+let sec = document.querySelector('#seconds')
+
+
+
+    const t = Date.parse(endTime) - Date.parse(new Date()) 
+    const days =  Math.floor((t / 1000) / 60 / 60 / 24)
+    const hours =  Math.floor((t / 1000) / 60 / 60 % 24)
+    const minutes =  Math.floor((t / 1000) / 60 % 60)
+    const seconds =  Math.floor((t / 1000) % 60)
+
+    return{
+        t,
+        days,
+        hours,
+        minutes,
+        seconds
+    }
+    console.log(days, hours, minutes, seconds);
+
+    // days.innerHTML = day
+    // hours.innerHTML = hour
+    // min.innerHTML = minute
+    // sec.innerText = second
+
+    
+
+}
+function setTimer(endTime, selector) {
+    let t = document.getElementById(selector)
+    let days = document.querySelector("#days")
+    let hours = document.querySelector("#hours")
+    let minutes = document.querySelector("#minutes")
+    let seconds = document.querySelector("#seconds")
+    let interval = setInterval(updateTimer, 1000)
+
+    
+
+    function updateTimer() {
+        let remainingTime = getRemainingTime(endTime)
+        
+        
+        days.innerHTML = remainingTime.days
+        hours.innerHTML = remainingTime.hours
+        minutes.innerHTML = remainingTime.minutes
+        seconds.innerHTML = remainingTime.seconds
+
+        if (remainingTime.t <= 0) {
+            clearInterval(interval)
+            jsConfetti.addConfetti({
+                emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
+    }).     then(() => jsConfetti.addConfetti())
+        }
+    }
+}
+
+setTimer(deadline, '.timer')
+
+
+
+
+
+button.addEventListener('click', () => {
+   
+})
