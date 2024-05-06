@@ -144,6 +144,10 @@ function setTimer(endTime, selector) {
 
         if (remainingTime.t <= 0) {
             clearInterval(interval)
+            days.innerHTML = 0
+            hours.innerHTML = 0
+            minutes.innerHTML = 0
+            seconds.innerHTML = 0
             jsConfetti.addConfetti({
                 emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸'],
     }).     then(() => jsConfetti.addConfetti())
