@@ -161,6 +161,3 @@ setTimer(deadline, '.timer')
 
 
 
-button.addEventListener('click', () => {
-   
-})
