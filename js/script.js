@@ -158,6 +158,77 @@ function setTimer(endTime, selector) {
 setTimer(deadline, '.timer')
 
 
+// calc
+
+const genderBtns = document.querySelectorAll('#gender .calculating__choose-item')
+const inputs = document.querySelectorAll('.calculating__choose_medium input')
+const act_btns = document.querySelectorAll('.calculating__choose_big .calculating__choose-item')
+const result_view = document.querySelector('#result')
+const mistake = document.querySelector(".calculating__result")
+
+const user = {
+    gender: "woman",
+
+}
+
+let genderIdx = 0
+genderBtns.forEach((btn,idx) => {
+    btn.onclick = () => {
+        const g = btn.getAttribute('data-gender')
+
+        user.gender = g
+
+        genderBtns[genderIdx].classList.remove('calculating__choose-item_active')   
+        btn.classList.add('calculating__choose-item_active')   
+
+        genderIdx = idx
+    }
+})
+
+
+inputs.forEach(inp => {
+    inp.oninput = () => {
+        user[inp.name] = inp.value
+    }
+})
+let calculating__result = document.querySelector('calculating__result')
+let calc_btn_idx = 1
+
+let result
+
+act_btns.forEach((btn, idx) => {
+    btn.onclick = () => {
+        const act = +btn.getAttribute('data-act')
+        if (user.weight <= 0 || user.height <= 0 || user.age <= 0 )  {
+            alert("Заполните все данные")
+            return
+        }
+
+        act_btns[calc_btn_idx].classList.remove('calculating__choose-item_active')
+        btn.classList.add('calculating__choose-item_active')
+
+        if (user.gender === 'woman') {
+            result = 655.1 + (9.563 * user.weight) + (1.85 * user.height) - (4.676 * user.age)
+            result_view.innerHTML = Math.round(result * act)
+        } else {
+            result = 66.5 + (13.75 * user.weight) + (5.003 * user.height) - (6.775 * user.age)
+            result_view.innerHTML = Math.round(result * act)
+        }
+
+        if (isNaN(result)) {
+            result_view.innerHTML = "Ошибка"
+            alert("заполните все данные")
+        }
+
+        calc_btn_idx = idx
+    };
+})
+
+
+// Для женщин: 655,1 + (9,563 × вес в кг) + (1,85 × рост в см) - (4,676 × возраст в годах);
+// Для мужчин: 66,5 + (13,75 × вес в кг) + (5,003 × рост в см) - (6,775 × возраст в годах).
+
+
 
 
 
